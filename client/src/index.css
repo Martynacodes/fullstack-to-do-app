@@ -30,6 +30,8 @@ body {
   margin-bottom: 0.7rem;
 }
 
+/* Buttons */
+
 .buttonsContainer {
   display: flex;
   align-items: center;
@@ -38,20 +40,82 @@ body {
 
 .buttonsContainer button {
   margin: 0 5px;
-  padding: 5px 10px;
   background-color: transparent;
-  border: 2px solid #fff;
+  border: solid #fff;
   color: #fff;
   font-size: 0.7rem;
   padding: 0 1.3rem;
   text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: solid rgba(255, 255, 255, 0.3);
   margin-left: 5px;
   cursor: pointer;
   transition: background 0.2s ease-out;
   height: 3rem;
 }
 
+button.edit {
+  text-transform: uppercase;
+}
+
+button.edit:hover {
+  background-color: rgba(149, 219, 156, 0.793);
+  font-weight: bold;
+  border-radius: 3px;
+  transition: transform 0.3s ease-in-out;
+}
+
+button.edit:active {
+  color: #fff;
+  font-weight: bold;
+  background-color: rgb(149, 219, 156);
+  border: 2px solid rgba(255, 255, 255 0.7);
+  border-radius: 3px;
+}
+
+button.delete {
+  text-transform: uppercase;
+}
+
+button.delete:hover {
+  border-radius: 3px;
+  background-color: rgba(255, 0, 0, 0.973);
+  font-weight: bold;
+  transition: transform 0.3s ease-in-out;
+}
+
+button.delete:active {
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  background-color: rgb(255, 0, 0);
+  border: 2px solid rgba(255, 255, 255 0.7);
+  border-radius: 3px;
+}
+
+button.addNew:hover,
+button.signOut:hover {
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+button.addNew:active {
+  color: #fff;
+  font-weight: bold;
+  background-color: rgb(149, 219, 156);
+  border: 2px solid rgba(255, 255, 255 0.7);
+  border-radius: 3px;
+}
+
+button.signOut:active {
+  color: #fff;
+  font-weight: bold;
+  background-color: rgba(255, 194, 88, 0.626);
+  border: 2px solid rgba(255, 255, 255 0.7);
+  border-radius: 3px;
+}
+
+/* ListHeader */
 .listHeader {
   width: 100%;
   display: flex;
@@ -63,4 +127,127 @@ body {
   margin-bottom: 0.7rem;
   margin-left: 3px;
   margin-top: 0.2rem;
+}
+
+/* List Item */
+.listItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+  padding-left: 3rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.listItem .infoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.listItem .tickIcon {
+  margin-right: 0.3rem;
+}
+
+.listItem .tickIcon path {
+  fill: none;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  stroke-width: 32px;
+}
+.listItem .tickIcon polyline {
+  stroke: #fff;
+}
+
+/* Modal */
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  margin-top: 2rem;
+  width: 500px;
+  max-height: 300px;
+  background-color: #cdc8b7;
+  padding: 40px;
+  box-shadow: -20px -20px 0px 0px rgba(17, 16, 16, 0.1);
+}
+
+.modal .formTitleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal .formTitleContainer h3 {
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.05em;
+  font-weight: normal;
+}
+
+.modal .formTitleContainer .closeButton {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  left: 20px;
+  top: -30px;
+  font-size: 1rem;
+}
+
+.modal .closeButton:active {
+  color: rgb(254, 89, 89);
+}
+
+.modal #submit {
+  margin: 0 5px;
+  background-color: transparent;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0 1.3rem;
+  text-transform: uppercase;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease-out;
+  height: 2.5rem;
+  margin-top: 0.7rem;
+}
+
+.modal #submit:hover {
+  background-color: rgba(149, 219, 156, 0.793);
+  border-color: rgba(149, 219, 156, 0.793);
+  font-weight: bold;
+  border-radius: 3px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+.modal label {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.modal input#title {
+  border: 2px solid #fff;
+  height: 2rem;
+}
+
+.modal input#range {
+  cursor: pointer;
 }
