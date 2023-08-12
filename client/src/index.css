@@ -38,7 +38,8 @@ body {
   justify-content: center;
 }
 
-.buttonsContainer button {
+.buttonsContainer button,
+.authContainer button {
   margin: 0 5px;
   background-color: transparent;
   border: solid #fff;
@@ -159,6 +160,9 @@ button.signOut:active {
 }
 .listItem .tickIcon polyline {
   stroke: #fff;
+  fill: none;
+  stroke-miterlimit: 10;
+  stroke-width: 32px;
 }
 
 /* Modal */
@@ -175,10 +179,10 @@ button.signOut:active {
 }
 
 .modal {
-  margin-top: 2rem;
+  margin: 2em 1em 1em;
   width: 500px;
   max-height: 300px;
-  background-color: #cdc8b7;
+  background-color: #ff6666;
   padding: 40px;
   box-shadow: -20px -20px 0px 0px rgba(17, 16, 16, 0.1);
 }
@@ -189,9 +193,10 @@ button.signOut:active {
 }
 
 .modal .formTitleContainer h3 {
-  margin-bottom: 0.7rem;
   letter-spacing: 0.05em;
   font-weight: normal;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
 }
 
 .modal .formTitleContainer .closeButton {
@@ -209,7 +214,8 @@ button.signOut:active {
   color: rgb(254, 89, 89);
 }
 
-.modal #submit {
+.modal #submit,
+.authContainer .authSubmit {
   margin: 0 5px;
   background-color: transparent;
   border: 5px solid rgba(255, 255, 255, 0.3);
@@ -225,7 +231,8 @@ button.signOut:active {
   margin-top: 0.7rem;
 }
 
-.modal #submit:hover {
+.modal #submit:hover,
+.authContainer .authSubmit:hover {
   background-color: rgba(149, 219, 156, 0.793);
   border-color: rgba(149, 219, 156, 0.793);
   font-weight: bold;
@@ -237,7 +244,8 @@ button.signOut:active {
   display: flex;
   flex-direction: column;
 }
-.modal label {
+.modal label,
+.authContainer label {
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
@@ -250,4 +258,50 @@ button.signOut:active {
 
 .modal input#range {
   cursor: pointer;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+/* Authorization page */
+
+.authContainer {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+.authContainerBox {
+  width: 500px;
+
+  overflow: hidden;
+}
+.authContainerBox form {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  padding: 20px;
+}
+
+.authOptions {
+  display: flex;
+}
+
+.authOptions button {
+  width: 50%;
+  padding: 10px;
+}
+.authContainer h2 {
+  font-weight: normal;
+  font-size: 1.7rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 0.7rem;
+}
+.authContainer input {
+  border: 2px solid #fff;
+  height: 2.2rem;
+  margin: 5px;
+}
+
+.authContainer button {
+  margin-top: 0.5em;
 }
