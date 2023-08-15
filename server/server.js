@@ -5,6 +5,13 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 const pool = require("./db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+// const corsOptions = {
+//   origin: "http://localhost:3000",
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Adjust based on your needs
+//   allowedHeaders: "Content-Type,Authorization", // Add any custom headers you use
+// };
 
 app.use(cors());
 app.use(express.json());
@@ -74,19 +81,42 @@ app.post("/signup", async (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(password, salt);
   try {
-    const newUser = await pool.query(
-      `INSERT INTO users (email, hashed_password) VALUES ($1, $2)`,
+    const signUp = await pool.query(
+      `INSERT INTO users (email, hashed_password) VALUES($1, $2)`,
       [email, hashedPassword]
     );
-    res.json(newUser);
+
+    const token = jwt.sign({ email }, "secret", { expiresIn: "1hr" });
+    res.json({ email, token });
   } catch (err) {
     console.error(err);
+    if (err) {
+      res.json({ detail: err.detail });
+    }
   }
 });
+
 // Login
 app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
+    const users = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+
+    if (!users.rows.length) return res.json({ detail: "User does not exist!" });
+    const success = await bcrypt.compare(
+      password,
+      users.rows[0].hashed_password
+    );
+    const token = jwt.sign({ email }, "secret", { expiresIn: "1hr" });
+
+    if (success) {
+      res.json({ email: users.rows[0].email, token });
+    } else {
+      res.json({ detail: "Login failed" });
+    }
   } catch (err) {
     console.error(err);
   }

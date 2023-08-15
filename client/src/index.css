@@ -305,3 +305,17 @@ button.signOut:active {
 .authContainer button {
   margin-top: 0.5em;
 }
+
+/* Progress Bar */
+
+.outerBar {
+  width: 200px;
+  height: 14px;
+  background-color: rgb(216, 216, 216);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.innerBar {
+  height: 14px;
+}

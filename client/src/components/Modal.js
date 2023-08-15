@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 const Modal = ({ mode, setShowModal, getData, task }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(null);
   const editMode = mode === "edit" ? true : false;
 
   const [data, setData] = useState({
-    user_email: editMode ? task.user_email : "martyna@test.com",
-    title: editMode ? task.title : "",
+    user_email: editMode ? task.user_email : cookies.Email,
+    title: editMode ? task.title : null,
     progress: editMode ? task.progress : 5,
     date: editMode ? "" : new Date(),
   });
@@ -14,12 +16,13 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/todos", {
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/todos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
       if (response.status === 200) {
+        console.log("WORKED");
         setShowModal(false);
         getData();
       }
@@ -32,11 +35,14 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:8000/todos/${task.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/todos/${task.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
       if (response.status === 200) {
         setShowModal(false);
         getData();

@@ -3,16 +3,19 @@ import ListItem from "./components/ListItem";
 import Authorization from "./components/Authorization";
 import "./index.css";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 const App = () => {
-  const userEmail = "martyna@test.com";
+  const [cookies, setCookie, removeCookie] = useCookies(null);
+  const authToken = cookies.authToken;
+  const userEmail = cookies.Email;
   const [tasks, setTasks] = useState(null);
-
-  const authToken = false;
 
   const getData = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/todos/${userEmail}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVERURL}/todos/${userEmail}`
+      );
       const json = await response.json();
       setTasks(json);
     } catch (err) {
@@ -21,7 +24,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (authToken) getData();
+    if (authToken) {
+      getData();
+    }
   }, []);
 
   console.log(tasks);
